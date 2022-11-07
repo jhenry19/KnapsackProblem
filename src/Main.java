@@ -9,7 +9,7 @@ public class Main {
 		items.add(new Item(4, 22, 6));
 		items.add(new Item(5, 28, 7));
 
-		Knapsack knapsack = new Knapsack(items, 10);
+		Knapsack knapsack = new Knapsack(items, 11);
 		knapsack.runProblem();
 	}
 }
