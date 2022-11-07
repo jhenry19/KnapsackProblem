@@ -15,6 +15,9 @@ public class Knapsack {
 		weight = w;
 		n = items.size();
 		M = new int[n + 1][w + 1]; // initialize the memoization table for this problem
+
+		runProblem();
+		findSolution(n);
 	}
 
 	int runProblem() {
@@ -41,9 +44,23 @@ public class Knapsack {
 			}
 			printMTable(i);
 		}
-//		System.out.println();
-//		printMTable();
 		return M[n-1][weight-1];
+	}
+
+//	void chooseItemsForSack() {
+//		ArrayList<Item> itemsInBag = new ArrayList<>();
+//	}
+
+	void findSolution(int j) {
+		int itemValue = items.get(j - 1).value;
+		int itemWeight = items.get(j - 1).value;
+		if (j == 0) System.out.println("");
+		else if (itemValue + M[j - 1][weight - itemWeight] > M[j-1][weight]) {
+			System.out.print("item " + Integer.toString(j) + " ");
+			findSolution(weight - itemWeight);
+		}
+		else
+			findSolution(j - 1);
 	}
 
 	void printMTable() {
