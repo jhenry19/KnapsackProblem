@@ -1,3 +1,4 @@
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +21,7 @@ public class Knapsack {
 		for (int z = 0; z <= n; z++) {
 			M[0][z] = 0;
 		}
+		printMTable(0);
 
 		int itemValue, itemWeight;
 
@@ -37,8 +39,10 @@ public class Knapsack {
 					M[i][w] = Math.max(M[i-1][w], itemValue + M[i-1][w - itemWeight]);
 				}
 			}
+			printMTable(i);
 		}
-		printMTable();
+//		System.out.println();
+//		printMTable();
 		return M[n-1][weight-1];
 	}
 
@@ -49,5 +53,15 @@ public class Knapsack {
 			}
 				System.out.println();
 		}
+	}
+
+	/**
+	 * Prints the the Ith row od Memoization table
+	 */
+	void printMTable(int row) {
+		for (int i = 0; i <= weight; i++){
+			System.out.print(M[row][i] + " ");
+		}
+		System.out.println();
 	}
 }
