@@ -17,7 +17,9 @@ public class Knapsack {
 		M = new int[n + 1][w + 1]; // initialize the memoization table for this problem
 
 		runProblem();
-		findSolution(n);
+		System.out.print("The following items are included in the optimal solution: ");
+		findSolution(n, w);
+		System.out.println("The total value of the Knapsack is " + M[n][weight]);
 	}
 
 	int runProblem() {
@@ -47,20 +49,14 @@ public class Knapsack {
 		return M[n-1][weight-1];
 	}
 
-//	void chooseItemsForSack() {
-//		ArrayList<Item> itemsInBag = new ArrayList<>();
-//	}
-
-	void findSolution(int j) {
-		int itemValue = items.get(j - 1).value;
-		int itemWeight = items.get(j - 1).value;
-		if (j == 0) System.out.println("");
-		else if (itemValue + M[j - 1][weight - itemWeight] > M[j-1][weight]) {
+	void findSolution(int j, int recursiveWeight) {
+		if (j == 0 || recursiveWeight == 0) System.out.println("");
+		else if (items.get(j - 1).value + M[j - 1][recursiveWeight - items.get(j - 1).weight] >= M[j-1][weight]) {
 			System.out.print("item " + Integer.toString(j) + " ");
-			findSolution(weight - itemWeight);
+			findSolution(j-1, recursiveWeight - items.get(j - 1).weight);
 		}
 		else
-			findSolution(j - 1);
+			findSolution(j - 1, recursiveWeight);
 	}
 
 	void printMTable() {

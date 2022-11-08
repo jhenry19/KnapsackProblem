@@ -10,6 +10,5 @@ public class Main {
 		items.add(new Item(5, 28, 7));
 
 		Knapsack knapsack = new Knapsack(items, 11);
-		knapsack.runProblem();
 	}
 }
