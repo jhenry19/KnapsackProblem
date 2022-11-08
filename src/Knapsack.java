@@ -51,12 +51,17 @@ public class Knapsack {
 
 	void findSolution(int j, int recursiveWeight) {
 		if (j == 0 || recursiveWeight == 0) System.out.println("");
-		else if (items.get(j - 1).value + M[j - 1][recursiveWeight - items.get(j - 1).weight] >= M[j-1][weight]) {
-			System.out.print("item " + Integer.toString(j) + " ");
-			findSolution(j-1, recursiveWeight - items.get(j - 1).weight);
+		else {
+			int itemValue = items.get(j - 1).value;
+			int itemWeight = items.get(j - 1).weight;
+
+			if (recursiveWeight - itemWeight < 0) findSolution(j - 1, recursiveWeight);
+			else if (itemValue + M[j - 1][recursiveWeight - itemWeight] >= M[j - 1][weight]) {
+				System.out.print("item " + Integer.toString(j) + " ");
+				findSolution(j - 1, recursiveWeight - itemWeight);
+			} else
+				findSolution(j - 1, recursiveWeight);
 		}
-		else
-			findSolution(j - 1, recursiveWeight);
 	}
 
 	void printMTable() {
